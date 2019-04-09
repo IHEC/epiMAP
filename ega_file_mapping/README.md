@@ -28,7 +28,7 @@ python get_files_metadata.py EGAD_list.txt > file_metadata.json
 
 ## Step 4: Build a map of EGAD->EGAX->EGAR->EGAF
 ```
-python generate_ega_file_mapping.py ./EGA_files_metadata/results.csv > egad_file_mapping.json
+python generate_ega_file_mapping.py ./input/results.csv > egad_file_mapping.json
 ```
 
 ## Step 5: Generate report
