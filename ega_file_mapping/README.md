@@ -3,10 +3,11 @@ Collection of scripts to get metadata on datasets located at EGA, such as the EG
 Requires Python 3.
 
 ## Step 0: Initial setup
-
+```
 python -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
+```
 
 ## Step 1: Get list of reference epigenomes from EpiRR
 ``````
