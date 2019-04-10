@@ -17,7 +17,6 @@ headers = {'Content-Type': 'application/json'}
 def main(argv):
     path = argv[0]
 
-    # datasets = {}
     egaf_metadata = {}
 
     with open(path, 'r') as egad_list:
@@ -39,7 +38,6 @@ def main(argv):
                 egaf_metadata[egaf] = file_metadata
 
             [process_file_metadata(x) for x in egad_files['response']['result']]
-            # datasets[egad] = egad_files
 
     print(json.dumps(egaf_metadata, indent=2))
 
