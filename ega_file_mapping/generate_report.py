@@ -34,20 +34,54 @@ def main(argv):
         total_bytes += egaf_json[egaf]['fileSize']
         file_count += 1
 
-    print('Total size: ', total_bytes)
-    print('Files: ', file_count)
 
 
-    # consortium = {}
-    # for epirr in epirr_json:
-    #     logging.info('Processing record %s' % epirr)
-    #     record = epirr_json[epirr]
-    #     for experiment in record['experiment_list']:
-    #         egad = experiment['secondary_id']
-    #         egax = experiment['primary_id']
+    report = {}
 
-        # struct = consortium.setdefault(record['project'], {'file_count': 0, 'size_count': 0})
-        # struct['file_count'] = egad_json[]
+    egax_stack = {}
+    egaf_stack = {}
+
+    for epirr in epirr_json:
+        logging.info('Processing record %s' % epirr)
+        record = epirr_json[epirr]
+
+        for experiment in record['experiment_list']:
+            egax = experiment['primary_id']
+            egad = experiment['secondary_id']
+
+            experiment['file_list'] = {}
+            if egax.startswith('EGAX'):
+                egax_stack[egax] = 1
+
+
+                #Fetch all EGAF
+                for egar in egad_json[egad][egax]:
+                    file_list = egad_json[egad][egax][egar]
+                    for file in file_list:
+                        if file in egaf_json:
+                            experiment['file_list'][file] = egaf_json[file]
+                        else:
+                            experiment['file_list'][file] = {}
+
+                        egaf_stack[file] = 1
+
+
+        report[epirr] = {
+            'consortium' : epirr_json[epirr]['project'],
+            'experiments' : record['experiment_list']
+        }
+
+
+    # print('-------------')
+    # difflist = list(set(egaf_json.keys()) - set(egaf_stack.keys()))
+    # print(difflist)
+
+    print(json.dumps(report, indent=2))
+
+    # print('Total size: ', total_bytes)
+    # print('Files: ', file_count)
+    # print('Experiments: ', len(egax_stack))
+    # print('Files 2: ', len(egaf_stack))
 
 
 

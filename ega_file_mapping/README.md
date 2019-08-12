@@ -46,7 +46,7 @@ python generate_ega_file_mapping.py ./input/results.csv > egad_file_mapping.json
 
 Compute basic stats on IHEC datasets 
 ```
-python generate_report.py file_metadata.json egad_file_mapping.json epirr_dump.json
+python generate_report.py file_metadata.json egad_file_mapping.json epirr_dump.json > final.json
 ```
 
 
